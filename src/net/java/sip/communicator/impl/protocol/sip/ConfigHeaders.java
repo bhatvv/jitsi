@@ -295,6 +295,7 @@ public class ConfigHeaders
                 value = value.replace("${tag}",fromHeader.getTag());
         }
         
+        //302 Route domain fix
         if (value.indexOf("${user.domain}") != -1)
         {
             ToHeader toHeader = (ToHeader) request.getHeader(ToHeader.NAME);
@@ -302,8 +303,6 @@ public class ConfigHeaders
             String toAddr = toURI.toString();
             int endIndex = toAddr.indexOf("@") > toAddr.lastIndexOf(":") ? toAddr.indexOf(";") : toAddr.lastIndexOf(":");
             String userDomain = toAddr.substring(toAddr.indexOf("@") + 1, endIndex);
-
-            logger.info("Martin...userDomain : " + userDomain);
 
             value = value.replace("${user.domain}",userDomain);
         }
