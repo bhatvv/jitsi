@@ -295,6 +295,19 @@ public class ConfigHeaders
                 value = value.replace("${tag}",fromHeader.getTag());
         }
         
+        if (value.indexOf("${user.domain}") != -1)
+        {
+            ToHeader toHeader = (ToHeader) request.getHeader(ToHeader.NAME);
+            URI toURI = toHeader.getAddress().getURI();
+            String toAddr = toURI.toString();
+            int endIndex = toAddr.indexOf("@") > toAddr.lastIndexOf(":") ? toAddr.indexOf(";") : toAddr.lastIndexOf(":");
+            String userDomain = toAddr.substring(toAddr.indexOf("@") + 1, endIndex);
+
+            logger.info("Martin...userDomain : " + userDomain);
+
+            value = value.replace("${user.domain}",userDomain);
+        }
+        
         // Needed of IMS
         if(value.indexOf("+") != -1 && !Boolean.parseBoolean(props.get(ProtocolProviderFactory.PLUS_ENABLED))) {
                 logger.info("Replacing + character !!");
