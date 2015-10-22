@@ -115,13 +115,16 @@ public class GroupPacketExtension
      */
     public void addContents(List<ContentPacketExtension> contents)
     {
-        for (ContentPacketExtension content : contents)
+        if (contents != null)
         {
-            ContentPacketExtension copy = new ContentPacketExtension();
-
-            copy.setName(content.getName());
-
-            addChildExtension(copy);
+            for (ContentPacketExtension content : contents)
+            {
+                ContentPacketExtension copy = new ContentPacketExtension();
+    
+                copy.setName(content.getName());
+    
+                addChildExtension(copy);
+            }
         }
     }
 }

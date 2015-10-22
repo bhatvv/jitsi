@@ -338,10 +338,20 @@ public class JinglePacketFactory
 
         sessionInitiate.setSID(sid);
         sessionInitiate.setAction(JingleAction.SESSION_INITIATE);
-
-        for(ContentPacketExtension content : contentList)
+        
+                                                                                                                                                                                                                                                                   
+       
+        
+        
+        
+        //logger.info("Inside createSessionInitiate Jitsi");
+        
+        if(contentList!=null)
         {
-            sessionInitiate.addContent(content);
+            for(ContentPacketExtension content : contentList)
+            {
+                sessionInitiate.addContent(content);
+            }
         }
 
         return sessionInitiate;
